@@ -12,14 +12,14 @@ class HomePage extends StatelessWidget {
           listener: (context, state) {
             if (state is InternetGainedState) {
               var snackBar = const SnackBar(
-                content: Text("Internet connected!"),
+                content: Text(Constants.internetConnect),
                 backgroundColor: Colors.green,
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
             if (state is InternetLostState) {
               var snackBar = const SnackBar(
-                  content: Text("Internet not connected!"),
+                  content: Text(Constants.internetDisConnect),
                   backgroundColor: Colors.red);
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
@@ -84,51 +84,24 @@ class HomePage extends StatelessWidget {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    BlocProvider.of<QuoteBloc>(
-                                                            context)
-                                                        .add(QuoteFavEvent(
-                                                            favState: snapshot
-                                                                    .hasData
-                                                                ? !snapshot
-                                                                    .data!
-                                                                    .favState
-                                                                : true));
-                                                  },
-                                                  child: Icon(
-                                                    snapshot.hasData
-                                                        ? snapshot.data
-                                                                    ?.favState ==
-                                                                false
-                                                            ? Icons
-                                                                .favorite_border_rounded
-                                                            : Icons.favorite
-                                                        : Icons
-                                                            .favorite_border_rounded,
-                                                    size: 40.0,
-                                                    color: Colors.red,
-                                                  ),
-                                                ),
+                                                CustomFavourite(
+                                                    snapshot: snapshot),
                                               ],
                                             );
                                           }),
-                                      Text(
-                                        state.quotesResponse.content ??
-                                            "Everyone thinks of changing the world, but no one thinks of changing himself.the world, but no one thinks of changing himself.",
-                                        style: const TextStyle(
+                                      CustomText(
+                                        text: state.quotesResponse.content ??
+                                            Constants.quoteContent,
+                                        textStyle: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 27,
                                           fontFamily: 'monospace',
                                         ),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 5,
-                                        textAlign: TextAlign.center,
                                       ),
-                                      Text(
-                                        state.quotesResponse.author ??
-                                            "Leo Tolstoy",
-                                        style: const TextStyle(
+                                      CustomText(
+                                        text: state.quotesResponse.author ??
+                                            Constants.quoteAuthor,
+                                        textStyle: const TextStyle(
                                           fontSize: 20,
                                           color: Colors.black87,
                                           fontFamily: 'serif',
@@ -139,37 +112,14 @@ class HomePage extends StatelessWidget {
                                                   context)
                                               .quoteRatingStreamState,
                                           builder: (context, snapshot) {
-                                            debugPrint(
-                                                'snapshot ===> ${snapshot.data?.updateRating}');
                                             return Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                RatingBarIndicator(
-                                                  rating: snapshot
-                                                          .data?.updateRating ??
-                                                      1,
-                                                  itemBuilder:
-                                                      (context, index) =>
-                                                          GestureDetector(
-                                                    onTap: () {
-                                                      BlocProvider.of<
-                                                                  QuoteBloc>(
-                                                              context)
-                                                          .add(QuoteRatingEvent(
-                                                              updateRating:
-                                                                  index + 1));
-                                                    },
-                                                    child: const Icon(
-                                                      Icons.star,
-                                                      color: Colors.amber,
-                                                    ),
-                                                  ),
-                                                  itemCount: 5,
-                                                  itemSize: 40.0,
-                                                  direction: Axis.horizontal,
-                                                  unratedColor: Colors.grey,
-                                                ),
+                                                CustomRatingBar(
+                                                    ratingValue: snapshot.data
+                                                            ?.updateRating ??
+                                                        1)
                                               ],
                                             );
                                           }),

@@ -31,7 +31,6 @@ class QuoteBloc extends Bloc<QuoteEvent, QuoteState> {
           .add(QuoteRatingState(updateRating: 1.0));
 
       QuotesResponse quotesResponse = await quoteUseCase.call();
-      debugPrint('_getRandomQuotes  quotesResponse ===> $quotesResponse');
       if (quotesResponse.content != null) {
         emit(QuoteSuccessState(quotesResponse: quotesResponse));
       } else {

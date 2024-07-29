@@ -1,12 +1,12 @@
 class QuotesResponse {
-  String? sId;
-  String? content;
-  String? author;
-  List<String>? tags;
-  String? authorSlug;
-  int? length;
-  String? dateAdded;
-  String? dateModified;
+  final String? sId;
+  final String? content;
+  final String? author;
+  final List<String>? tags;
+  final String? authorSlug;
+  final int? length;
+  final String? dateAdded;
+  final String? dateModified;
 
   QuotesResponse(
       {this.sId,
@@ -18,15 +18,16 @@ class QuotesResponse {
       this.dateAdded,
       this.dateModified});
 
-  QuotesResponse.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-    content = json['content'];
-    author = json['author'];
-    tags = json['tags'].cast<String>();
-    authorSlug = json['authorSlug'];
-    length = json['length'];
-    dateAdded = json['dateAdded'];
-    dateModified = json['dateModified'];
+  factory QuotesResponse.fromJson(Map<String, dynamic> json) {
+    return QuotesResponse(
+        sId: json['_id'],
+        content: json['content'],
+        author: json['author'],
+        tags: json['tags'].cast<String>(),
+        authorSlug: json['authorSlug'],
+        length: json['length'],
+        dateAdded: json['dateAdded'],
+        dateModified: json['dateModified']);
   }
 
   Map<String, dynamic> toJson() {
