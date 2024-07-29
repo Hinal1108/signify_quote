@@ -2,6 +2,7 @@ library quote;
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,12 @@ import 'package:signify_quote/utils/constants.dart';
 import 'package:signify_quote/utils/json_path_constants.dart';
 
 import 'core/usecase.dart';
-import 'data/responsemodels/quotes_response.dart';
+import 'data/models/quotes_response.dart';
 import 'network/bloc/internet_bloc.dart';
 
 part "api/api_client.dart";
 part 'domain/usecase/quote_usecase.dart';
+part "package:signify_quote/api/app_http_overrides.dart";
 part "package:signify_quote/data/repositories/quote_repository_impl.dart";
 part "package:signify_quote/domain/repository/quote_repository.dart";
 part 'package:signify_quote/presentation/bloc/quotes/quote_bloc.dart';
