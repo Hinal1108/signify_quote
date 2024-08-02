@@ -10,4 +10,5 @@ final class Constants {
   static const Key valueRatingKey = Key('RatingKey');
   static const Key valueFavouriteKey = Key('FavouriteKey');
   static const Key valueTextKey = Key('TextKey');
+  static const String favQuoteSharedPref = 'favQuote';
 }

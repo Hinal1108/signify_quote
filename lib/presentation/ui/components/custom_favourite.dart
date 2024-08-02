@@ -2,7 +2,10 @@ part of '../../../quote.dart';
 
 class CustomFavourite extends StatelessWidget {
   final AsyncSnapshot<QuoteFavState> snapshot;
-  const CustomFavourite({super.key, required this.snapshot});
+  final QuotesResponse quotesResponse;
+
+  const CustomFavourite(
+      {super.key, required this.snapshot, required this.quotesResponse});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +14,8 @@ class CustomFavourite extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           BlocProvider.of<QuoteBloc>(context).add(QuoteFavEvent(
-              favState: snapshot.hasData ? !snapshot.data!.favState : true));
+              favState: snapshot.hasData ? !snapshot.data!.favState : true,
+              quotesResponse: quotesResponse));
         },
         child: Icon(
           snapshot.hasData

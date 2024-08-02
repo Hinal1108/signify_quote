@@ -85,7 +85,10 @@ class HomePage extends StatelessWidget {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 CustomFavourite(
-                                                    snapshot: snapshot),
+                                                  snapshot: snapshot,
+                                                  quotesResponse:
+                                                      state.quotesResponse,
+                                                ),
                                               ],
                                             );
                                           }),
@@ -156,6 +159,10 @@ class HomePage extends StatelessWidget {
                     }
                   },
                 ),
+                const SizedBox(
+                  height: 50.0,
+                ),
+                // TextButton(onPressed: onPressed, child: child);
               ],
             ),
           ),

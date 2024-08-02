@@ -46,6 +46,8 @@ class QuoteBloc extends Bloc<QuoteEvent, QuoteState> {
       QuoteFavEvent event, Emitter<QuoteState> emit) {
     quoteFavStateStreamController.sink
         .add(QuoteFavState(favState: event.favState));
+    String favQuote = json.encode(event.quotesResponse);
+    quoteUseCase.saveFavQuote(favQuote);
   }
 
   FutureOr<void> _updateRatingValue(

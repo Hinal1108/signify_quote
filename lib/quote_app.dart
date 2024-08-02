@@ -10,12 +10,17 @@ class QuoteApp extends StatefulWidget {
 class _QuoteAppState extends State<QuoteApp> {
   late QuoteUseCase quoteUseCase;
   final ApiClient apiClient = ApiClient();
+  late SharedPreferences sharedPreferences;
 
   @override
   void initState() {
     super.initState();
-    quoteUseCase =
-        QuoteUseCase(quoteRepository: QuoteRepositoryImpl(api: apiClient));
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      sharedPreferences = await SharedPreferences.getInstance();
+    });
+    quoteUseCase = QuoteUseCase(
+        quoteRepository: QuoteRepositoryImpl(
+            api: apiClient, sharedPreferences: sharedPreferences));
   }
 
   @override

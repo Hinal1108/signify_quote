@@ -10,4 +10,9 @@ class QuoteUseCase implements UseCase<QuotesResponse> {
   Future<QuotesResponse> call() {
     return _quoteRepository.fetchQuotes();
   }
+
+  @override
+  void saveFavQuote(String favQuote) {
+    _quoteRepository.saveFavQuotes(favQuote);
+  }
 }

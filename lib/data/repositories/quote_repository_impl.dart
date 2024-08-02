@@ -2,8 +2,12 @@ part of '../../quote.dart';
 
 class QuoteRepositoryImpl implements QuoteRepository {
   final ApiClient _api;
+  final SharedPreferences _sharedPreferences;
 
-  QuoteRepositoryImpl({required ApiClient api}) : _api = api;
+  QuoteRepositoryImpl(
+      {required ApiClient api, required SharedPreferences sharedPreferences})
+      : _api = api,
+        _sharedPreferences = sharedPreferences;
   @override
   Future<QuotesResponse> fetchQuotes() async {
     try {
@@ -25,5 +29,10 @@ class QuoteRepositoryImpl implements QuoteRepository {
       QuotesResponse quotesResponse = QuotesResponse.fromJson(data);
       return quotesResponse;
     }
+  }
+
+  @override
+  void saveFavQuotes(String favQuote) {
+    _sharedPreferences.setString(Constants.favQuoteSharedPref, favQuote);
   }
 }
